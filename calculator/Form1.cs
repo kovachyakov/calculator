@@ -47,18 +47,32 @@ namespace calculator
 
         private void button13_Click(object sender, EventArgs e)
         {
-            if ((solvethis[solvethis.Length - 1] == '+') ||
-                (solvethis[solvethis.Length - 1] == '-') ||
-                (solvethis[solvethis.Length - 1] == '*') ||
-                (solvethis[solvethis.Length - 1] == '/'))
+            bool SiteNotExist = true;
+            for (int i = 0; i < solvethis.Length; i++)
             {
-                string a = solvethis;
-                solvethis = a.Remove(a.Length - 1, 1);
-                label1.Text = a.Remove(a.Length - 1, 1);
+                char[] a = solvethis.ToCharArray();
+                if ((a[i] == '+') ||
+                    (a[i] == '-') ||
+                    (a[i] == '*') ||
+                    (a[i] == '/'))
+                {
+                    SiteNotExist = false;
+                }
             }
-            solvethis += "+";
-            label1.Text += "+";
-            
+            if (SiteNotExist)
+            {
+                if ((solvethis[solvethis.Length - 1] == '+') ||
+                    (solvethis[solvethis.Length - 1] == '-') ||
+                    (solvethis[solvethis.Length - 1] == '*') ||
+                    (solvethis[solvethis.Length - 1] == '/'))
+                {
+                    string a = solvethis;
+                    solvethis = a.Remove(a.Length - 1, 1);
+                    label1.Text = a.Remove(a.Length - 1, 1);
+                }
+                solvethis += "+";
+                label1.Text += "+";
+            }
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -80,44 +94,50 @@ namespace calculator
                     line1 = solvethis.Substring(0,i);
                     line2 = solvethis.Substring(i+1, solvethis.Length-i-1);
                  }
-
             }
 
             int r = 0;
-            if (sign=='+')
+            if (line2 != "")
             {
-                r = Convert.ToInt32(line1) + Convert.ToInt32(line2);
-                label1.Text += "=" + Convert.ToString(r);
-                solvethis += "=" + Convert.ToString(r);
-            }
-            else if (sign == '-')
-            {
-                r = Convert.ToInt32(line1) - Convert.ToInt32(line2);
-                label1.Text += "=" + Convert.ToString(r);
-                solvethis += "=" + Convert.ToString(r);
-            }
-            else if (sign == '*')
-            {
-                r = Convert.ToInt32(line1) * Convert.ToInt32(line2);
-                label1.Text += "=" + Convert.ToString(r);
-                solvethis += "=" + Convert.ToString(r);
-            }
-            
-
-            if (sign == '/')
-            {
-                if (line2=="0")
+                if (sign == '+')
                 {
-                    label1.Text = "errror";
-                    solvethis = "";
-                }
-                else
-                {
-                    r = Convert.ToInt32(line1) / Convert.ToInt32(line2);
+                    r = Convert.ToInt32(line1) + Convert.ToInt32(line2);
                     label1.Text += "=" + Convert.ToString(r);
                     solvethis += "=" + Convert.ToString(r);
                 }
-            } 
+                else if (sign == '-')
+                {
+                    r = Convert.ToInt32(line1) - Convert.ToInt32(line2);
+                    label1.Text += "=" + Convert.ToString(r);
+                    solvethis += "=" + Convert.ToString(r);
+                }
+                else if (sign == '*')
+                {
+                    r = Convert.ToInt32(line1) * Convert.ToInt32(line2);
+                    label1.Text += "=" + Convert.ToString(r);
+                    solvethis += "=" + Convert.ToString(r);
+                }
+
+
+                if (sign == '/')
+                {
+                    if (line2 == "0")
+                    {
+                        label1.Text = "errror";
+                        solvethis = "";
+                    }
+                    else
+                    {
+                        r = Convert.ToInt32(line1) / Convert.ToInt32(line2);
+                        label1.Text += "=" + Convert.ToString(r);
+                        solvethis += "=" + Convert.ToString(r);
+                    }
+                }
+            }
+            else
+            {
+                label1.Text = "error";
+            }
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -164,47 +184,96 @@ namespace calculator
 
         private void button14_Click(object sender, EventArgs e)
         {
-            if ((solvethis[solvethis.Length - 1] == '+') ||
-                (solvethis[solvethis.Length - 1] == '-') ||
-                (solvethis[solvethis.Length - 1] == '*') ||
-                (solvethis[solvethis.Length - 1] == '/'))
+            bool SiteNotExist = true;
+            for (int i = 0; i < solvethis.Length; i++)
             {
-                string a = solvethis;
-                solvethis = a.Remove(a.Length - 1, 1);
-                label1.Text = a.Remove(a.Length - 1, 1);
+                char[] a = solvethis.ToCharArray();
+                if ((a[i] == '+') ||
+                    (a[i] == '-') ||
+                    (a[i] == '*') ||
+                    (a[i] == '/'))
+                {
+                    SiteNotExist = false;
+                }
+
             }
-            solvethis += "-";
-            label1.Text += "-";
+            if (SiteNotExist)
+            {
+                if ((solvethis[solvethis.Length - 1] == '+') ||
+                    (solvethis[solvethis.Length - 1] == '-') ||
+                    (solvethis[solvethis.Length - 1] == '*') ||
+                    (solvethis[solvethis.Length - 1] == '/'))
+                {
+                    string a = solvethis;
+                    solvethis = a.Remove(a.Length - 1, 1);
+                    label1.Text = a.Remove(a.Length - 1, 1);
+                }
+                solvethis += "-";
+                label1.Text += "-";
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            if ((solvethis[solvethis.Length - 1] == '+') ||
-                (solvethis[solvethis.Length - 1] == '-') ||
-                (solvethis[solvethis.Length - 1] == '*') ||
-                (solvethis[solvethis.Length - 1] == '/'))
+            bool SiteNotExist = true;
+            for (int i = 0; i < solvethis.Length; i++)
             {
-                string a = solvethis;
-                solvethis = a.Remove(a.Length - 1, 1);
-                label1.Text = a.Remove(a.Length - 1, 1);
+                char[] a = solvethis.ToCharArray();
+                if ((a[i] == '+') ||
+                    (a[i] == '-') ||
+                    (a[i] == '*') ||
+                    (a[i] == '/'))
+                {
+                    SiteNotExist = false;
+                }
+
             }
-            solvethis += "*";
-            label1.Text += "*";
+            if (SiteNotExist)
+            {
+                if ((solvethis[solvethis.Length - 1] == '+') ||
+                    (solvethis[solvethis.Length - 1] == '-') ||
+                    (solvethis[solvethis.Length - 1] == '*') ||
+                    (solvethis[solvethis.Length - 1] == '/'))
+                {
+                    string a = solvethis;
+                    solvethis = a.Remove(a.Length - 1, 1);
+                    label1.Text = a.Remove(a.Length - 1, 1);
+                }
+                solvethis += "*";
+                label1.Text += "*";
+            }
+
+            
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            if ((solvethis[solvethis.Length - 1] == '+') ||
-                   (solvethis[solvethis.Length - 1] == '-') ||
-                   (solvethis[solvethis.Length - 1] == '*') ||
-                   (solvethis[solvethis.Length - 1] == '/'))
+            bool SiteNotExist = true;
+            for (int i = 0; i < solvethis.Length; i++)
             {
-                string a = solvethis;
-                solvethis = a.Remove(a.Length - 1, 1);
-                label1.Text = a.Remove(a.Length - 1, 1);
+                char[] a = solvethis.ToCharArray();
+                if ((a[i] == '+') ||
+                    (a[i] == '-') ||
+                    (a[i] == '*') ||
+                    (a[i] == '/'))
+                {
+                    SiteNotExist = false;
+                }
             }
-            solvethis += "/";
-            label1.Text += "/";
+            if (SiteNotExist)
+            {
+                if ((solvethis[solvethis.Length - 1] == '+') ||
+                    (solvethis[solvethis.Length - 1] == '-') ||
+                    (solvethis[solvethis.Length - 1] == '*') ||
+                    (solvethis[solvethis.Length - 1] == '/'))
+                {
+                    string a = solvethis;
+                    solvethis = a.Remove(a.Length - 1, 1);
+                    label1.Text = a.Remove(a.Length - 1, 1);
+                }
+                solvethis += "/";
+                label1.Text += "/";
+            }
         }
 
         private void button16_Click(object sender, EventArgs e)
