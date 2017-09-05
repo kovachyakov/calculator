@@ -16,7 +16,8 @@ namespace calculator
         {
             InitializeComponent();
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            Bitmap MyImage = new Bitmap(@"C:\Users\yakov\source\repos\calculator\calculator\2.bmp");
+            Bitmap MyImage = new Bitmap(Application.StartupPath + @"\2.bmp");
+            
             pictureBox1.ClientSize = new Size(MyImage.Width, MyImage.Height);
             pictureBox1.Image = (Image)MyImage;
         }
