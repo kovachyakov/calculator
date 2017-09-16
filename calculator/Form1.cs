@@ -24,6 +24,11 @@ namespace calculator
         public string solvethis = "";
         private void button1_Click(object sender, EventArgs e)
         {
+            if (label1.Text == "error")
+            {
+                label1.Text = "";
+                solvethis = "";
+            }
             solvethis += "1";
             label1.Text += "1";
         }
@@ -35,19 +40,31 @@ namespace calculator
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (label1.Text=="error")
+            {
+                label1.Text = "";
+                solvethis = "";
+            }
             solvethis += "2";
             label1.Text += "2";
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (label1.Text == "error")
+            {
+                label1.Text = "";
+                solvethis = "";
+            }
             solvethis += "3";
             label1.Text += "3";
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            bool SiteNotExist = true;
+            bool SiteExist = false;
+            bool Equal = true;
+            int num = 0;
             for (int i = 0; i < solvethis.Length; i++)
             {
                 char[] a = solvethis.ToCharArray();
@@ -56,23 +73,41 @@ namespace calculator
                     (a[i] == '*') ||
                     (a[i] == '/'))
                 {
-                    SiteNotExist = false;
+                    SiteExist = true;
+                    num = i;
+                }
+                if (a[i]=='=')
+                {
+                    Equal = false;
                 }
             }
-            if (SiteNotExist)
+            if (Equal)
             {
-                if ((solvethis[solvethis.Length - 1] == '+') ||
-                    (solvethis[solvethis.Length - 1] == '-') ||
-                    (solvethis[solvethis.Length - 1] == '*') ||
-                    (solvethis[solvethis.Length - 1] == '/'))
+                if (SiteExist)
                 {
                     string a = solvethis;
-                    solvethis = a.Remove(a.Length - 1, 1);
-                    label1.Text = a.Remove(a.Length - 1, 1);
+                    if (num == 0)
+                    {
+                        solvethis = a.Remove(a.Length - 1, 1);
+                        label1.Text = a.Remove(a.Length - 1, 1);
+                        solvethis += "+";
+                        label1.Text += "+";
+                    }
+                    else
+                    {
+                        solvethis = a.Remove(num, 1);
+                        label1.Text = a.Remove(num, 1);
+                        a = solvethis;
+                        solvethis = a.Insert(num, "+");
+                        label1.Text = a.Insert(num, "+");
+                    }
                 }
-                solvethis += "+";
-                label1.Text += "+";
-            }
+                else
+                {
+                    solvethis += "+";
+                    label1.Text += "+";
+                }
+            } 
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -81,110 +116,159 @@ namespace calculator
             string line1="";
             string line2="";
             char sign=' ';
-            
-            for (int i = 0; i < solvethis.Length; i++)
+            bool gocount = true;
+            for (int i = 0; i < a.Length; i++)
             {
-                
-                 if ((a[i] == '+') ||
-                     (a[i] == '-') ||
-                     (a[i] == '*') ||
-                     (a[i] == '/'))
-                 {
-                    sign = a[i];
-                    line1 = solvethis.Substring(0,i);
-                    line2 = solvethis.Substring(i+1, solvethis.Length-i-1);
-                 }
+                if (a[i]=='=')
+                {
+                    gocount = false;
+                }
             }
-
-            int r = 0;
-            if (line2 != "")
+            if (gocount)
             {
-                if (sign == '+')
-                {
-                    r = Convert.ToInt32(line1) + Convert.ToInt32(line2);
-                    label1.Text += "=" + Convert.ToString(r);
-                    solvethis += "=" + Convert.ToString(r);
-                }
-                else if (sign == '-')
-                {
-                    r = Convert.ToInt32(line1) - Convert.ToInt32(line2);
-                    label1.Text += "=" + Convert.ToString(r);
-                    solvethis += "=" + Convert.ToString(r);
-                }
-                else if (sign == '*')
-                {
-                    r = Convert.ToInt32(line1) * Convert.ToInt32(line2);
-                    label1.Text += "=" + Convert.ToString(r);
-                    solvethis += "=" + Convert.ToString(r);
-                }
 
 
-                if (sign == '/')
+                for (int i = 0; i < solvethis.Length; i++)
                 {
-                    if (line2 == "0")
+
+                    if ((a[i] == '+') ||
+                        (a[i] == '-') ||
+                        (a[i] == '*') ||
+                        (a[i] == '/'))
                     {
-                        label1.Text = "errror";
-                        solvethis = "";
+                        sign = a[i];
+                        line1 = solvethis.Substring(0, i);
+                        line2 = solvethis.Substring(i + 1, solvethis.Length - i - 1);
                     }
-                    else
+                }
+
+                int r = 0;
+                if (line2 != "")
+                {
+                    if (sign == '+')
                     {
-                        r = Convert.ToInt32(line1) / Convert.ToInt32(line2);
+                        r = Convert.ToInt32(line1) + Convert.ToInt32(line2);
                         label1.Text += "=" + Convert.ToString(r);
                         solvethis += "=" + Convert.ToString(r);
                     }
+                    else if (sign == '-')
+                    {
+                        r = Convert.ToInt32(line1) - Convert.ToInt32(line2);
+                        label1.Text += "=" + Convert.ToString(r);
+                        solvethis += "=" + Convert.ToString(r);
+                    }
+                    else if (sign == '*')
+                    {
+                        r = Convert.ToInt32(line1) * Convert.ToInt32(line2);
+                        label1.Text += "=" + Convert.ToString(r);
+                        solvethis += "=" + Convert.ToString(r);
+                    }
+
+
+                    if (sign == '/')
+                    {
+                        if (line2 == "0")
+                        {
+                            label1.Text = "errror";
+                            solvethis = "";
+                        }
+                        else
+                        {
+                            r = Convert.ToInt32(line1) / Convert.ToInt32(line2);
+                            label1.Text += "=" + Convert.ToString(r);
+                            solvethis += "=" + Convert.ToString(r);
+                        }
+                    }
                 }
-            }
-            else
-            {
-                label1.Text = "error";
+                else
+                {
+                    label1.Text = "error";
+                }
             }
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
+            if (label1.Text == "error")
+            {
+                label1.Text = "";
+                solvethis = "";
+            }
             solvethis += "0";
             label1.Text += "0";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (label1.Text == "error")
+            {
+                label1.Text = "";
+                solvethis = "";
+            }
             solvethis += "4";
             label1.Text += "4";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            if (label1.Text == "error")
+            {
+                label1.Text = "";
+                solvethis = "";
+            }
             solvethis += "5";
             label1.Text += "5";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            if (label1.Text == "error")
+            {
+                label1.Text = "";
+                solvethis = "";
+            }
             solvethis += "6";
             label1.Text += "6";
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            if (label1.Text == "error")
+            {
+                label1.Text = "";
+                solvethis = "";
+            }
             solvethis += "7";
             label1.Text += "7";
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
+            if (label1.Text == "error")
+            {
+                label1.Text = "";
+                solvethis = "";
+            }
             solvethis += "8";
             label1.Text += "8";
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+            if (label1.Text == "error")
+            {
+                label1.Text = "";
+                solvethis = "";
+            }
             solvethis += "9";
             label1.Text += "9";
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            bool SiteNotExist = true;
+            bool SiteExist = false;
+            bool Equal = true;
+            int num = 0;
             for (int i = 0; i < solvethis.Length; i++)
             {
                 char[] a = solvethis.ToCharArray();
@@ -193,29 +277,48 @@ namespace calculator
                     (a[i] == '*') ||
                     (a[i] == '/'))
                 {
-                    SiteNotExist = false;
+                    SiteExist = true;
+                    num = i;
                 }
-
+                if (a[i]=='=')
+                {
+                    Equal = false;
+                }
             }
-            if (SiteNotExist)
+            if (Equal)
             {
-                if ((solvethis[solvethis.Length - 1] == '+') ||
-                    (solvethis[solvethis.Length - 1] == '-') ||
-                    (solvethis[solvethis.Length - 1] == '*') ||
-                    (solvethis[solvethis.Length - 1] == '/'))
+                if (SiteExist)
                 {
                     string a = solvethis;
-                    solvethis = a.Remove(a.Length - 1, 1);
-                    label1.Text = a.Remove(a.Length - 1, 1);
+                    if (num == 0)
+                    {
+                        solvethis = a.Remove(a.Length - 1, 1);
+                        label1.Text = a.Remove(a.Length - 1, 1);
+                        solvethis += "-";
+                        label1.Text += "-";
+                    }
+                    else
+                    {
+                        solvethis = a.Remove(num, 1);
+                        label1.Text = a.Remove(num, 1);
+                        a = solvethis;
+                        solvethis = a.Insert(num, "-");
+                        label1.Text = a.Insert(num, "-");
+                    }
                 }
-                solvethis += "-";
-                label1.Text += "-";
+                else
+                {
+                    solvethis += "-";
+                    label1.Text += "-";
+                }
             }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            bool SiteNotExist = true;
+            bool SiteExist = false;
+            bool Equal = true;
+            int num = 0;
             for (int i = 0; i < solvethis.Length; i++)
             {
                 char[] a = solvethis.ToCharArray();
@@ -224,31 +327,48 @@ namespace calculator
                     (a[i] == '*') ||
                     (a[i] == '/'))
                 {
-                    SiteNotExist = false;
+                    SiteExist = true;
+                    num = i;
                 }
-
+                if (a[i] == '=')
+                {
+                    Equal = false;
+                }
             }
-            if (SiteNotExist)
+            if (Equal)
             {
-                if ((solvethis[solvethis.Length - 1] == '+') ||
-                    (solvethis[solvethis.Length - 1] == '-') ||
-                    (solvethis[solvethis.Length - 1] == '*') ||
-                    (solvethis[solvethis.Length - 1] == '/'))
+                if (SiteExist)
                 {
                     string a = solvethis;
-                    solvethis = a.Remove(a.Length - 1, 1);
-                    label1.Text = a.Remove(a.Length - 1, 1);
+                    if (num == 0)
+                    {
+                        solvethis = a.Remove(a.Length - 1, 1);
+                        label1.Text = a.Remove(a.Length - 1, 1);
+                        solvethis += "*";
+                        label1.Text += "*";
+                    }
+                    else
+                    {
+                        solvethis = a.Remove(num, 1);
+                        label1.Text = a.Remove(num, 1);
+                        a = solvethis;
+                        solvethis = a.Insert(num, "*");
+                        label1.Text = a.Insert(num, "*");
+                    }
                 }
-                solvethis += "*";
-                label1.Text += "*";
+                else
+                {
+                    solvethis += "*";
+                    label1.Text += "*";
+                }
             }
-
-            
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            bool SiteNotExist = true;
+            bool SiteExist = false;
+            bool Equal = true;
+            int num = 0;
             for (int i = 0; i < solvethis.Length; i++)
             {
                 char[] a = solvethis.ToCharArray();
@@ -257,22 +377,40 @@ namespace calculator
                     (a[i] == '*') ||
                     (a[i] == '/'))
                 {
-                    SiteNotExist = false;
+                    SiteExist = true;
+                    num = i;
+                }
+                if (a[i] == '=')
+                {
+                    Equal = false;
                 }
             }
-            if (SiteNotExist)
+            if (Equal)
             {
-                if ((solvethis[solvethis.Length - 1] == '+') ||
-                    (solvethis[solvethis.Length - 1] == '-') ||
-                    (solvethis[solvethis.Length - 1] == '*') ||
-                    (solvethis[solvethis.Length - 1] == '/'))
+                if (SiteExist)
                 {
                     string a = solvethis;
-                    solvethis = a.Remove(a.Length - 1, 1);
-                    label1.Text = a.Remove(a.Length - 1, 1);
+                    if (num == 0)
+                    {
+                        solvethis = a.Remove(a.Length - 1, 1);
+                        label1.Text = a.Remove(a.Length - 1, 1);
+                        solvethis += "/";
+                        label1.Text += "/";
+                    }
+                    else
+                    {
+                        solvethis = a.Remove(num, 1);
+                        label1.Text = a.Remove(num, 1);
+                        a = solvethis;
+                        solvethis = a.Insert(num, "/");
+                        label1.Text = a.Insert(num, "/");
+                    }
                 }
-                solvethis += "/";
-                label1.Text += "/";
+                else
+                {
+                    solvethis += "/";
+                    label1.Text += "/";
+                }
             }
         }
 
@@ -285,8 +423,11 @@ namespace calculator
         private void button17_Click(object sender, EventArgs e)
         {
             string a = solvethis;
-            solvethis = a.Remove(a.Length - 1, 1);
-            label1.Text = a.Remove(a.Length - 1, 1);
+            if (solvethis!="")
+            {
+                solvethis = a.Remove(a.Length - 1, 1);
+                label1.Text = a.Remove(a.Length - 1, 1);
+            }
         }
 
         private void button18_Click(object sender, EventArgs e)

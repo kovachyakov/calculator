@@ -18,3 +18,13 @@ C:\Users\yakov\source\calculator\calculator\obj\Debug\calculator.csproj.Generate
 C:\Users\yakov\source\calculator\calculator\obj\Debug\calculator.csproj.CoreCompileInputs.cache
 C:\Users\yakov\source\calculator\calculator\obj\Debug\calculator.exe
 C:\Users\yakov\source\calculator\calculator\obj\Debug\calculator.pdb
+C:\Users\yakov\Desktop\calculator\calculator\bin\Debug\calculator.exe.config
+C:\Users\yakov\Desktop\calculator\calculator\bin\Debug\calculator.exe
+C:\Users\yakov\Desktop\calculator\calculator\bin\Debug\calculator.pdb
+C:\Users\yakov\Desktop\calculator\calculator\obj\Debug\calculator.csprojResolveAssemblyReference.cache
+C:\Users\yakov\Desktop\calculator\calculator\obj\Debug\calculator.Form1.resources
+C:\Users\yakov\Desktop\calculator\calculator\obj\Debug\calculator.Properties.Resources.resources
+C:\Users\yakov\Desktop\calculator\calculator\obj\Debug\calculator.csproj.GenerateResource.Cache
+C:\Users\yakov\Desktop\calculator\calculator\obj\Debug\calculator.csproj.CoreCompileInputs.cache
+C:\Users\yakov\Desktop\calculator\calculator\obj\Debug\calculator.exe
+C:\Users\yakov\Desktop\calculator\calculator\obj\Debug\calculator.pdb
