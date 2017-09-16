@@ -126,8 +126,6 @@ namespace calculator
             }
             if (gocount)
             {
-
-
                 for (int i = 0; i < solvethis.Length; i++)
                 {
 
@@ -142,24 +140,25 @@ namespace calculator
                     }
                 }
 
-                int r = 0;
+                long r = 0;
                 if (line2 != "")
                 {
                     if (sign == '+')
                     {
-                        r = Convert.ToInt32(line1) + Convert.ToInt32(line2);
+                        
+                        r = Convert.ToInt64(line1) + Convert.ToInt64(line2);
                         label1.Text += "=" + Convert.ToString(r);
                         solvethis += "=" + Convert.ToString(r);
                     }
                     else if (sign == '-')
                     {
-                        r = Convert.ToInt32(line1) - Convert.ToInt32(line2);
+                        r = Convert.ToInt64(line1) - Convert.ToInt64(line2);
                         label1.Text += "=" + Convert.ToString(r);
                         solvethis += "=" + Convert.ToString(r);
                     }
                     else if (sign == '*')
                     {
-                        r = Convert.ToInt32(line1) * Convert.ToInt32(line2);
+                        r = Convert.ToInt64(line1) * Convert.ToInt64(line2);
                         label1.Text += "=" + Convert.ToString(r);
                         solvethis += "=" + Convert.ToString(r);
                     }
@@ -169,12 +168,12 @@ namespace calculator
                     {
                         if (line2 == "0")
                         {
-                            label1.Text = "errror";
+                            label1.Text = "error";
                             solvethis = "";
                         }
                         else
                         {
-                            r = Convert.ToInt32(line1) / Convert.ToInt32(line2);
+                            r = Convert.ToInt64(line1) / Convert.ToInt64(line2);
                             label1.Text += "=" + Convert.ToString(r);
                             solvethis += "=" + Convert.ToString(r);
                         }
